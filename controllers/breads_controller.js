@@ -1,7 +1,7 @@
 const express = require("express");
 const breads = express.Router();
 const Bread = require("../models/bread.js");
-
+const Baker = require('../models/baker.js')
 
 breads.get('/data/seed', (req, res) => {
   Bread.insertMany([
@@ -43,7 +43,12 @@ breads.get("/", (req, res) => {
 
 // NEW
 breads.get("/new", (req, res) => {
-  res.render("new");
+  Baker.find()
+    .then(foundBakers => {
+        res.render('new', {
+          bakers: foundBakers
+        })
+    })
 });
 
 // EDIT
