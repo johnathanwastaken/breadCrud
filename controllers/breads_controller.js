@@ -2,6 +2,7 @@ const express = require("express");
 const breads = express.Router();
 const Bread = require("../models/bread.js");
 
+
 breads.get('/data/seed', (req, res) => {
   Bread.insertMany([
     {
@@ -59,8 +60,8 @@ breads.get('/:id/edit', (req, res) => {
 breads.get('/:id', (req, res) => {
   Bread.findById(req.params.id)
       .then(foundBread => {
-        const bakedBy = foundBread.getBakedBy() 
-        console.log(bakedBy);
+        const bakedBy = foundBread.getBakedBy()
+        console.log(bakedBy)
         res.render('show', {
             bread: foundBread
         })
